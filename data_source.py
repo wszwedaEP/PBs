@@ -12,10 +12,14 @@ class DataSource:
         pass
 
     def get_details(self, PB_id):
+        """zwraca listę domów podpiętą do danego PB"""
         return self.households_connected_to_PB[PB_id]
 
 
     def get_distance(self, PB_id1, PB_id2):
+        """wylicza dystans pitagorasowy między dwoma PB, a następnie
+        dodaje losowy narzut reprezentujący przeszkody na drodze światłowodu"""
+
         a=self.PB_coordinates[PB_id1][0]**2 + self.PB_coordinates[PB_id2][0]**2
         b=self.PB_coordinates[PB_id1][1]**2 + self.PB_coordinates[PB_id2][1]**2
         c=random.randrange(-7,7)
