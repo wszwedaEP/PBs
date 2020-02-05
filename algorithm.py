@@ -43,8 +43,12 @@ class singleHouseholdRearranger:
 
                 print('Single_PBs {}'.format(self.single_hh_PB_ids))
                 'stwórz tymczasową kopię rozpatrywanych PB, tak żeby nie zawierała id PB który chcemy podłączyć'
+                '(jesli w poprzedniej iteracji single_PB wypadł z listy, jako że już nie jest single, nic nie rób)'
                 temp_available_PB_ids=self.available_PB_ids.copy()
-                temp_available_PB_ids.remove(PB_single_hh)
+                try:
+                    temp_available_PB_ids.remove(PB_single_hh)
+                except ValueError:
+                    pass
                 'zainicjuj tymczasową macierz, gdzie pierwsza kolumna jest PB id'
                 'a druga kolumna jest dystans między rozważanym PB,'
                 'a tym dla którego szukamy nowego miejsca'
@@ -68,6 +72,11 @@ class singleHouseholdRearranger:
 
                 'usun z listy single PB ten, ktory zostal przepięty do innego PB'
                 self.single_hh_PB_ids.remove(PB_single_hh)
+                'jesli PB do którego się przypięliśmy sam był pojedynczym PB, usuń go z listy single_PB'
+                try:
+                    self.single_hh_PB_ids.remove(best_candidate)
+                except ValueError:
+                    pass
                 'usun z listy dostępnych PB ten, który własnie zostal przepiety do innego PB'
                 self.available_PB_ids.remove(PB_single_hh)
                 'aby zachowac dlugosc listy po której iterujemy, dostaw na początek X'

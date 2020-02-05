@@ -1,7 +1,7 @@
 from typing import Dict, List, Tuple
 import random
 import numpy as np
-random.seed(43)
+#random.seed(43)
 # random.randrange(0, 10)
 
 class DataSource:
